@@ -28,3 +28,9 @@ steps:
     provider: 'aws'
     command: 'plan'
     environmentServiceNameAWS: 'aws-terraform'
+
+- task: TerraformTaskV3@3
+  inputs:
+    provider: 'aws'
+    command: 'apply'
+    environmentServiceNameAWS: 'aws-terraform'
