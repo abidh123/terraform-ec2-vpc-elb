@@ -23,14 +23,20 @@ steps:
     backendAWSBucketName: 'terraform-aws-1075'
     backendAWSKey: 'terraform.tfstate'
 
-- task: TerraformTaskV3@3
+- task: Terraform INIT
   inputs:
     provider: 'aws'
     command: 'plan'
     environmentServiceNameAWS: 'aws-terraform'
 
-- task: TerraformTaskV3@3
+- task: Terraform Apply
   inputs:
     provider: 'aws'
     command: 'apply'
+    environmentServiceNameAWS: 'aws-terraform'
+
+- task: Terraform Destroy
+  inputs:
+    provider: 'aws'
+    command: 'destroy'
     environmentServiceNameAWS: 'aws-terraform'
