@@ -28,4 +28,3 @@ steps:
     provider: 'aws'
     command: 'plan'
     environmentServiceNameAWS: 'aws-terraform'
-
