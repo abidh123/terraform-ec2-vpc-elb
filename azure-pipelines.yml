@@ -14,7 +14,8 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- task: TerraforminitV3@3
+- task: TerraformTaskV3@3
+  displayName: 'Terraform init'
   inputs:
     provider: 'aws'
     command: 'init'
@@ -23,19 +24,22 @@ steps:
     backendAWSBucketName: 'terraform-aws-1075'
     backendAWSKey: 'terraform.tfstate'
 
-- task: TerraformPlan@3
+- task: TerraformTaskV3@3
+  displayName: 'Terraform plan'
   inputs:
     provider: 'aws'
     command: 'plan'
     environmentServiceNameAWS: 'aws-terraform'
 
-- task: TerraformApply@3
+- task: TerraformTaskV3@3
+  displayName: 'Terraform apply'
   inputs:
     provider: 'aws'
     command: 'apply'
     environmentServiceNameAWS: 'aws-terraform'
 
-- task: TerraformDestroy@3
+- task: TerraformTaskV3@3
+  displayName: 'Terraform destroy'
   inputs:
     provider: 'aws'
     command: 'destroy'
