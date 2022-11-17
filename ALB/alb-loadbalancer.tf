@@ -1,4 +1,4 @@
-module "vpcnew" {
+module "vpcnew2" {
   source = "../VPC"
 }
 
@@ -14,8 +14,8 @@ module "alb" {
 
   load_balancer_type = "application"
 
-  vpc_id             = module.vpcnew.vpc_id
-  subnets            = [module.vpcnew.vpcpublicsubnets[0], module.vpcnew.vpcpublicsubnets[1]]
+  vpc_id             = module.vpcnew2.vpc_id
+  subnets            = [module.vpcnew2.vpcpublicsubnets[0], module.vpcnew.vpcpublicsubnets[1]]
   security_groups    = [module.alb-public-security-group.security_group_id]
   enable_http2 = true
 
