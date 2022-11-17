@@ -6,53 +6,53 @@ pool:
 stages:
   - stage: creating-instance-and-vpc
     jobs:
-      - job: creating-instance-and-vpc
-        steps:
-        - task: TerraformTaskV3@3
-          displayName: Terraform INIT
-          inputs:
-            provider: 'aws'
-            command: 'init'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/EC2_VPC'
-            backendServiceAWS: 'aws-terraform'
-            backendAWSBucketName: 'terraform-aws-1075'
-            backendAWSKey: 'terraform.tfstate'
+    - job: creating-instance-and-vpc
+      steps:
+      - task: TerraformTaskV3@3
+        displayName: Terraform INIT
+        inputs:
+          provider: 'aws'
+          command: 'init'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/EC2_VPC'
+          backendServiceAWS: 'aws-terraform'
+          backendAWSBucketName: 'terraform-aws-1075'
+          backendAWSKey: 'terraform.tfstate'
 
-        - task: TerraformTaskV3@3
-          displayName: Terraform PLAN
-          inputs:
-            provider: 'aws'
-            command: 'plan'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/EC2_VPC'
-            environmentServiceNameAWS: 'aws-terraform'
-        - task: TerraformTaskV3@3
-          displayName: Terraform Apply
-          inputs:
-            provider: 'aws'
-            command: 'apply'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/EC2_VPC'
-            environmentServiceNameAWS: 'aws-terraform'
+      - task: TerraformTaskV3@3
+        displayName: Terraform PLAN
+        inputs:
+          provider: 'aws'
+          command: 'plan'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/EC2_VPC'
+          environmentServiceNameAWS: 'aws-terraform'
+      - task: TerraformTaskV3@3
+        displayName: Terraform Apply
+        inputs:
+          provider: 'aws'
+          command: 'apply'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/EC2_VPC'
+          environmentServiceNameAWS: 'aws-terraform'
 
-  - stage: creating-alB
+  - stage: creating-alb
     jobs:
-      - job: creating-alb
-        steps:
-        - task: TerraformTaskV3@3
-          displayName: Terraform INIT
-          inputs:
-            provider: 'aws'
-            command: 'init'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/ALB'
-            backendServiceAWS: 'aws-terraform'
-            backendAWSBucketName: 'terraform-aws-1075'
-            backendAWSKey: 'terraform.tfstate'
+    - job: creating-alb
+      steps:
+      - task: TerraformTaskV3@3
+        displayName: Terraform INIT
+        inputs:
+          provider: 'aws'
+          command: 'init'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/ALB'
+          backendServiceAWS: 'aws-terraform'
+          backendAWSBucketName: 'terraform-aws-1075'
+          backendAWSKey: 'terraform.tfstate'
 
-        - task: TerraformTaskV3@3
-          displayName: Terraform Apply
-          inputs:
-            provider: 'aws'
-            command: 'apply'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/ALB'
-            environmentServiceNameAWS: 'aws-terraform'
+      - task: TerraformTaskV3@3
+        displayName: Terraform Apply
+        inputs:
+          provider: 'aws'
+          command: 'apply'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/ALB'
+          environmentServiceNameAWS: 'aws-terraform'
                   
      
