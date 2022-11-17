@@ -1,17 +1,20 @@
-module "vpc" {
+module "vpcnew" {
+  source = "../EC2_VPC"
+}
+module "privateinstance" {
   source = "../EC2_VPC"
 }
 
 module "alb" {
-    depends_on = [ module.vpc]
+    depends_on = [ module.vpcnew]
   source  = "terraform-aws-modules/alb/aws"
   version = "8.1.0"
   name = "my-public-application-terraform"
 
   load_balancer_type = "application"
 
-  vpc_id             = module.vpc.vpc_id
-  subnets            = [module.vpc.public_subnets[0], module.vpc.public_subnets[1]]
+  vpc_id             = module.vpcnew.vpc_id
+  subnets            = [module.vpcnew.public_subnets[0], module.vpcnew.public_subnets[1]]
   security_groups    = [module.alb-public-security-group.security_group_id]
   enable_http2 = true
 
@@ -38,7 +41,7 @@ module "alb" {
         protocol_version = "HTTP1"
       targets = {
         my_target_1 = {
-          target_id = module.private-ec2-instance.id
+          target_id = module.privateinstance.id
           port = 80
         }
       }
