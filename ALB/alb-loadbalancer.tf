@@ -7,7 +7,7 @@ module "privateinstancevalue" {
 }
 
 module "alb" {
-    depends_on = [ module.vpcnew]
+    depends_on = [ module.vpcnew1]
   source  = "terraform-aws-modules/alb/aws"
   version = "8.1.0"
   name = "my-public-application-terraform"
