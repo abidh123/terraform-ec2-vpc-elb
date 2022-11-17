@@ -1,6 +1,4 @@
-module "vpcnew" {
-  source = "../VPC"
-}
+
 
 module "ec2-security-group" {
   source  = "terraform-aws-modules/security-group/aws"

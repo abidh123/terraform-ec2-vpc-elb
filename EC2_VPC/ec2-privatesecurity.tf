@@ -1,6 +1,4 @@
-module "vpcnew" {
-  source = "../VPC"
-}
+
 
 module "ec2-private-security-group" {
   source  = "terraform-aws-modules/security-group/aws"
@@ -15,3 +13,4 @@ module "ec2-private-security-group" {
     "Name" = "private_ec2_sg"
   }
 }
+
