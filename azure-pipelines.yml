@@ -32,6 +32,12 @@ stages:
           command: 'apply'
           workingDirectory: '$(System.DefaultWorkingDirectory)/EC2_VPC'
           environmentServiceNameAWS: 'aws-terraform'
+      - task: TerraformTaskV3@3
+        inputs:
+          provider: 'aws'
+          command: 'destroy'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/EC2_VPC'
+          environmentServiceNameAWS: 'aws-terraform'
 
   
                   
