@@ -1,6 +1,4 @@
-module "vpcnew1" {
-  source = "../VPC"
-}
+
 
 module "alb-public-security-group" {
   source  = "terraform-aws-modules/security-group/aws"
