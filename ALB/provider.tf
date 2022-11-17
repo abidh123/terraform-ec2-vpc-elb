@@ -1,4 +1,4 @@
-terraform {
+/*terraform {
   required_version = ">= 0.14"
   required_providers {
     aws = {
@@ -17,7 +17,7 @@ terraform {
   }
   }
   
-
+*/
 
 provider "aws" {
   
