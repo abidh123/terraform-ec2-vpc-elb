@@ -4,7 +4,7 @@
 # https://aka.ms/yaml
 
 trigger:
-- newone
+- none
 
 pool:
   name: salman-terraform
@@ -15,6 +15,7 @@ steps:
   displayName: 'Run a one-line script'
 
 - task: TerraformTaskV3@3
+  displayName: 'Terraform init'
   inputs:
     provider: 'aws'
     command: 'init'
@@ -24,7 +25,22 @@ steps:
     backendAWSKey: 'terraform.tfstate'
 
 - task: TerraformTaskV3@3
+  displayName: 'Terraform plan'
   inputs:
     provider: 'aws'
     command: 'plan'
+    environmentServiceNameAWS: 'aws-terraform'
+
+- task: TerraformTaskV3@3
+  displayName: 'Terraform apply'
+  inputs:
+    provider: 'aws'
+    command: 'apply'
+    environmentServiceNameAWS: 'aws-terraform'
+
+- task: TerraformTaskV3@3
+  displayName: 'Terraform destroy'
+  inputs:
+    provider: 'aws'
+    command: 'destroy'
     environmentServiceNameAWS: 'aws-terraform'
