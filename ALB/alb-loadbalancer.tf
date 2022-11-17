@@ -1,5 +1,5 @@
 module "vpcnew1" {
-  source = "../VPC"
+  source = "../EC2_VPC"
 }
 
 module "privateinstancevalue" {
