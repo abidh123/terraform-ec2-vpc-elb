@@ -1,46 +1,58 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - none
-
 pool:
-  name: salman-terraform
-  vmImage: agent-0777
+ name: salman-terraform
+ vmImage: agent-0777
+stages:
+  - stage: Creating ec2 and vpc
+    jobs:
+      - job: creating ec2 and vpc
+        steps:
+        - task: TerraformTaskV3@3
+          displayName: Terraform INIT
+          inputs:
+            provider: 'aws'
+            command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/EC2_VPC'
+            backendServiceAWS: 'aws-terraform'
+            backendAWSBucketName: 'terraform-aws-1075'
+            backendAWSKey: 'terraform.tfstate'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+        - task: TerraformTaskV3@3
+          displayName: Terraform PLAN
+          inputs:
+            provider: 'aws'
+            command: 'plan'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/EC2_VPC'
+            environmentServiceNameAWS: 'aws-terraform'
+        - task: TerraformTaskV3@3
+          displayName: Terraform Apply
+          inputs:
+            provider: 'aws'
+            command: 'apply'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/EC2_VPC'
+            environmentServiceNameAWS: 'aws-terraform'
 
-- task: TerraformTaskV3@3
-  displayName: 'Terraform init'
-  inputs:
-    provider: 'aws'
-    command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
-    backendServiceAWS: 'aws-terraform'
-    backendAWSBucketName: 'terraform-aws-1075'
-    backendAWSKey: 'terraform.tfstate'
+  - stage: Creating ALB
+    jobs:
+      - job: Creating ALB
+        steps:
+        - task: TerraformTaskV3@3
+          displayName: Terraform INIT
+          inputs:
+            provider: 'aws'
+            command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/ALB'
+            backendServiceAWS: 'aws-terraform'
+            backendAWSBucketName: 'terraform-aws-1075'
+            backendAWSKey: 'terraform.tfstate'
 
-- task: TerraformTaskV3@3
-  displayName: 'Terraform plan'
-  inputs:
-    provider: 'aws'
-    command: 'plan'
-    environmentServiceNameAWS: 'aws-terraform'
-
-- task: TerraformTaskV3@3
-  displayName: 'Terraform apply'
-  inputs:
-    provider: 'aws'
-    command: 'apply'
-    environmentServiceNameAWS: 'aws-terraform'
-
-- task: TerraformTaskV3@3
-  displayName: 'Terraform destroy'
-  inputs:
-    provider: 'aws'
-    command: 'destroy'
-    environmentServiceNameAWS: 'aws-terraform'
+        - task: TerraformTaskV3@3
+          displayName: Terraform Apply
+          inputs:
+            provider: 'aws'
+            command: 'apply'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/ALB'
+            environmentServiceNameAWS: 'aws-terraform'
+                  
+     
