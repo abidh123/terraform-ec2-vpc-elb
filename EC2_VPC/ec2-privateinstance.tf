@@ -7,6 +7,7 @@ module "private-ec2-instance" {
   key_name = var.keyname
   vpc_security_group_ids = [module.ec2-private-security-group.security_group_id]
   subnet_id = module.vpc.private_subnets[0]
+  user_data = file("${path.module}/app1-install.sh")
   tags = {
     "Name" = "ec2-private-instance"
   }

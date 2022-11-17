@@ -5,7 +5,7 @@ resource "null_resource" "name" {
     host = aws_eip.bastion_eip.public_ip
     user = "ec2-user"
     password = ""
-    private_key = file("keyfile/commonkeypairs.pem")
+    private_key = file("../keyfile/commonkeypairs.pem")
   } 
 
  # Copies the terraform-key.pem file to /tmp/terraform-key.pem
