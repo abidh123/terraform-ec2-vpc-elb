@@ -10,7 +10,7 @@ resource "null_resource" "name" {
 
  # Copies the terraform-key.pem file to /tmp/terraform-key.pem
   provisioner "file" {
-    source      = "keyfile/commonkeypairs.pem"
+    source      = "../keyfile/commonkeypairs.pem"
     destination = "/tmp/commonkeypairs.pem"
   }  
 
