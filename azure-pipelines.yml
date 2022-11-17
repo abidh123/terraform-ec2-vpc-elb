@@ -4,9 +4,9 @@ pool:
  name: salman-terraform
  vmImage: agent-0777
 stages:
-  - stage: creating instance and vpc
+  - stage: creating-instance-and-vpc
     jobs:
-      - job: creating instance and vpc
+      - job: creating-instance-and-vpc
         steps:
         - task: TerraformTaskV3@3
           displayName: Terraform INIT
@@ -33,9 +33,9 @@ stages:
             workingDirectory: '$(System.DefaultWorkingDirectory)/EC2_VPC'
             environmentServiceNameAWS: 'aws-terraform'
 
-  - stage: creating aLB
+  - stage: creating-alB
     jobs:
-      - job: creating aLB
+      - job: creating-alb
         steps:
         - task: TerraformTaskV3@3
           displayName: Terraform INIT
