@@ -1,5 +1,5 @@
-module "vpcnew1" {
-  source = "../EC2_VPC"
+module "vpcnew" {
+  source = "../VPC"
 }
 
 module "privateinstancevalue" {
@@ -7,15 +7,15 @@ module "privateinstancevalue" {
 }
 
 module "alb" {
-    depends_on = [ module.vpcnew1]
+    #depends_on = [ module.vpcnew1]
   source  = "terraform-aws-modules/alb/aws"
   version = "8.1.0"
   name = "my-public-application-terraform"
 
   load_balancer_type = "application"
 
-  vpc_id             = module.vpcnew1.vpc_id
-  subnets            = [module.vpcnew1.vpcpublicsubnets[0], module.vpcnew1.vpcpublicsubnets[1]]
+  vpc_id             = module.vpcnew.vpc_id
+  subnets            = [module.vpcnew.vpcpublicsubnets[0], module.vpcnew.vpcpublicsubnets[1]]
   security_groups    = [module.alb-public-security-group.security_group_id]
   enable_http2 = true
 
