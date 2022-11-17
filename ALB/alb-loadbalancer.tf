@@ -1,7 +1,8 @@
-module "vpcnew" {
-  source = "../EC2_VPC"
+module "vpcnew1" {
+  source = "../VPC"
 }
-module "privateinstance" {
+
+module "privateinstancevalue" {
   source = "../EC2_VPC"
 }
 
@@ -13,8 +14,8 @@ module "alb" {
 
   load_balancer_type = "application"
 
-  vpc_id             = module.vpcnew.vpc_id
-  subnets            = [module.vpcnew.public_subnets[0], module.vpcnew.public_subnets[1]]
+  vpc_id             = module.vpcnew1.vpc_id
+  subnets            = [module.vpcnew1.vpcpublicsubnets[0], module.vpcnew1.vpcpublicsubnets[1]]
   security_groups    = [module.alb-public-security-group.security_group_id]
   enable_http2 = true
 
@@ -41,7 +42,7 @@ module "alb" {
         protocol_version = "HTTP1"
       targets = {
         my_target_1 = {
-          target_id = module.privateinstance.id
+          target_id = module.privateinstancevalue.privateinstanceid
           port = 80
         }
       }
