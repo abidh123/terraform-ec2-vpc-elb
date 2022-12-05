@@ -1,19 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: GKE-APP
+  name: gkeapp
+  labels:
+    app: gkeapp
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: GKE-APP
+      app: gkeapp
   template:
     metadata:
       labels:
-        app: GKE-APP
+        app: gkeapp
     spec:
       containers:
-      - name: GKE-APP
+      - name: gkeapp
         image: abidh786/httpd-image:76
         ports:
         - containerPort: 80
@@ -21,10 +23,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: GKE-SERVICE
+  name: gkeservice
+  labels:
+    app: gkeapp
 spec:
   selector:
-    app: GKE-APP
+    app: gkeapp
   ports:
   - port: 80
     targetPort: 80
@@ -33,19 +37,21 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: GKE-APP-2022
+  name: gkeapp2022
+  labels:
+    app: gkeapp2022
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: GKE-APP-2022
+      app: gkeapp2022
   template:
     metadata:
       labels:
-        app: GKE-APP-2022
+        app: gkeapp2022
     spec:
       containers:
-      - name: GKE-APP-2022
+      - name: gkeapp2022
         image: abidh786/httpd-image:76
         ports:
         - containerPort: 80
@@ -53,10 +59,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: GKE-SERVICE-2022
+  name: gkeservice2022
+  labels:
+    app: gkeapp2022
 spec:
   selector:
-    app: GKE-APP-2022
+    app: gkeservice2022
   ports:
   - port: 80
     targetPort: 80
@@ -67,9 +75,9 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: GKE-INGRESS
+  name: gkeingress
   labels:
-    name: GKE-INGRESS
+    name: gkeingress
 spec:
   rules:
   - http:
@@ -78,7 +86,7 @@ spec:
         path: "/"
         backend:
           service:
-            name: GKE-SERVICE
+            name: gkeservice
             port: 
               number: 80
       
@@ -86,7 +94,7 @@ spec:
         path: "/app2"
         backend:
           service:
-            name: GKE-SERVICE-2022
+            name: gkeservice2022
             port: 
               number: 80
       
