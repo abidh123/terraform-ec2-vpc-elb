@@ -15,10 +15,17 @@ spec:
         app: gkeapp
     spec:
       containers:
-      - name: gkeapp
+      - name: gkeap
         image: abidh786/httpd-image:76
         ports:
         - containerPort: 80
+        volumeMounts:
+          - name: mypvc
+            mountPath: /secrets
+      volumes:
+        - name: mypvc
+          persistentVolumeClaim:
+            claimName: mypvc       
 ---
 apiVersion: v1
 kind: Service
