@@ -14,18 +14,39 @@ spec:
       labels:
         app: gkeapp
     spec:
+      serviceAccountName: ksa-cloud-sql
       containers:
       - name: gkeap
         image: abidh786/httpd-image:76
+        env:
+          - name: DB_PORT
+            value: "3306"
+          - name: INSTANCE_HOST 
+            value: "127.0.0.1"
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: mysqldbpassword
+                key:  user
+          - name: DB_PASS
+            valueFrom:
+              secretKeyRef:
+                name: mysqldbpassword
+                key:  password
+          - name: cloud-sql-proxy
+        
+            image: gcr.io/cloudsql-docker/gce-proxy:latest
+            command:
+              - "/cloud_sql_proxy"
+              - "-instances=folkloric-union-370015:us-east1:mysql-2022=tcp:3306"
+            securityContext:
+          # The default Cloud SQL proxy image runs as the
+          # "nonroot" user and group (uid: 65532) by default.
+              runAsNonRoot: true             
+
         ports:
         - containerPort: 80
-        volumeMounts:
-          - name: mypvc
-            mountPath: /secrets
-      volumes:
-        - name: mypvc
-          persistentVolumeClaim:
-            claimName: mypvc       
+          
 ---
 apiVersion: v1
 kind: Service
