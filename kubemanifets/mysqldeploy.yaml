@@ -24,6 +24,12 @@ spec:
               secretKeyRef:
                 name: mysqldbpassword
                 key: password
+          - name: salman
+            valueFrom:
+              secretKeyRef:
+                name:  mysqldbpassword
+                key: salman  
+                   
         ports:
         - containerPort: 3306
           name: mysql
