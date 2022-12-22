@@ -36,16 +36,16 @@ spec:
 ---
 
 apiVersion: networking.k8s.io/v1
-kind: Ingress
+kind: gkeingress
 metadata:
   name: gkeingress
   labels:
     name: gkeingress
-  annotations:  
-    networking.gke.io/managed-certificates: managed-cert 
-    kubernetes.io/ingress.class: "gce"   
+  annotations:
+    networking.gke.io/managed-certificates: managed-cert
+    kubernetes.io/ingress.class: "gce"  
 spec:
-rules:
+  rules:
   - host: abidhsk.ga
     http:
       paths:
@@ -56,5 +56,6 @@ rules:
             name: gkeservice
             port: 
               number: 80
+
 
         
