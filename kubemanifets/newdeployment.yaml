@@ -38,9 +38,12 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: Gkeingress
+  name: gkeingress
   labels:
-    name: Gkeingress
+    name: gkeingress
+  annotations:  
+    networking.gke.io/managed-certificates: managed-cert 
+    kubernetes.io/ingress.class: "gce"   
 spec:
   rules:
   - http:
