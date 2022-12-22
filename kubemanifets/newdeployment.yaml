@@ -45,8 +45,9 @@ metadata:
     networking.gke.io/managed-certificates: managed-cert 
     kubernetes.io/ingress.class: "gce"   
 spec:
-  rules:
-  - http:
+rules:
+  - host: abidhsk.ga
+    http:
       paths:
       - pathType: Prefix
         path: "/"
