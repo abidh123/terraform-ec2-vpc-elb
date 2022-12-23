@@ -40,16 +40,11 @@ kind: Ingress
 metadata:
   name: gkeingress
   labels:
-    name: gkeingress 
-  annotations:
-    networking.gke.io/managed-certificates: managed-cert
-    kubernetes.io/ingress.class: "gce"
-
-     
+    name: gkeingress
+         
 spec:
   rules:
-  - host: abidhsk.ga
-    http:
+  - http: 
       paths:
       - pathType: Prefix
         path: "/"
