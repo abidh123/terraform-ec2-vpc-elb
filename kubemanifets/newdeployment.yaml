@@ -40,12 +40,11 @@ kind: Ingress
 metadata:
   name: gkeingress
   labels:
-    name: gkeingress
+    name: gkeingress  
      
 spec:
   rules:
-  - host: abidhsk.ga
-    http:
+  - http:
       paths:
       - pathType: Prefix
         path: "/"
