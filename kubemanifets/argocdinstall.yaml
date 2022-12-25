@@ -9890,7 +9890,7 @@ spec:
     targetPort: 8084
   selector:
     app.kubernetes.io/name: argocd-repo-server
----
+
 # apiVersion: v1
 # kind: Service
 # metadata:
