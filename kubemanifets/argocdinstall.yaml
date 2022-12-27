@@ -10512,7 +10512,7 @@ spec:
             configMapKeyRef:
               key: server.insecure
               name: argocd-cmd-params-cm
-              optional: false
+              optional: true
         - name: ARGOCD_SERVER_BASEHREF
           valueFrom:
             configMapKeyRef:
