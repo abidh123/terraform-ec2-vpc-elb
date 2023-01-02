@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: gkeapp
-        image:  abidh786/httpd-image:77
+        image:  gcr.io/folkloric-union-370015/newimage:latest
         ports:
         - containerPort: 80
 ---
