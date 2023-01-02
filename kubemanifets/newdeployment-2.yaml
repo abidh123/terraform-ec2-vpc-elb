@@ -42,7 +42,9 @@ metadata:
   labels:
     name: gkeingress2
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: helloweb-ip  
+    kubernetes.io/ingress.global-static-ip-name: helloweb-ip
+    networking.gke.io/managed-certificates: managed-cert
+    kubernetes.io/ingress.class: "gce"   
 
 spec:
   rules:
