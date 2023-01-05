@@ -23,13 +23,13 @@ spec:
             path: /app2
             port: 80
           initialDelaySeconds: 60
-          timeoutseconds: 3
+          periodSeconds: 3
         readinessProbe:
           httpGet:
             path: /app2
             port: 80
           initialDelaySeconds: 60
-          timeoutseconds: 3      
+          periodSeconds: 3      
 ---
 apiVersion: v1
 kind: Service
