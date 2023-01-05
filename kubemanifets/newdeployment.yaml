@@ -33,30 +33,30 @@ spec:
     targetPort: 80
   type: NodePort 
 
----
+# ---
 
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: gkeingress
-  labels:
-    name: gkeingress
-  annotations:
-    kubernetes.io/ingress.global-static-ip-name: helloweb-ip
-    # networking.gke.io/managed-certificates: managed-cert
-    # kubernetes.io/ingress.class: "gce"   
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: gkeingress
+#   labels:
+#     name: gkeingress
+#   annotations:
+#     kubernetes.io/ingress.global-static-ip-name: helloweb-ip
+#     # networking.gke.io/managed-certificates: managed-cert
+#     # kubernetes.io/ingress.class: "gce"   
 
-spec:
-  rules:
-  - http: 
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: gkeservice
-            port: 
-              number: 80
+# spec:
+#   rules:
+#   - http: 
+#       paths:
+#       - pathType: Prefix
+#         path: "/app2"
+#         backend:
+#           service:
+#             name: gkeservice2
+#             port: 
+#               number: 80
 
 
         
