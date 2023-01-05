@@ -17,7 +17,7 @@ spec:
       - name: gkeapp
         image:  abidh786/httpd-image:76
         ports:
-        - containerPort: 80
+        - containerPort: 1234
 ---
 apiVersion: v1
 kind: Service
@@ -29,9 +29,9 @@ spec:
   selector:
     app: gkeapp
   ports:
-  - port: 80
-    targetPort: 80
-  type: NodePort 
+  - port: 1234
+    targetPort: 1234
+  type: ClusterIP 
 
 ---
 
@@ -54,7 +54,7 @@ spec:
           service:
             name: gkeservice
             port: 
-              number: 80
+              number: 1234
 
 
         
