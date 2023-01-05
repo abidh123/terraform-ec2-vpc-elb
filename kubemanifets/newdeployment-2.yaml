@@ -25,6 +25,10 @@ metadata:
   name: gkeservice2
   labels:
     app: gkeapp2
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+    cloud.google.com/backend-config: '{"ports": {"http":"argocd-backend-config"}}'
+      
 spec:
   selector:
     app: gkeapp2

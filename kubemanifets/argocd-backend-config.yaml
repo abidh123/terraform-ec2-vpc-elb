@@ -2,7 +2,7 @@ apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
   name: argocd-backend-config
-  namespace: argocd
+  namespace: dev
 spec:
   healthCheck:
     checkIntervalSec: 30
@@ -10,5 +10,5 @@ spec:
     healthyThreshold: 1
     unhealthyThreshold: 2
     type: HTTP
-    requestPath: /healthz
-    port: 8080
+    requestPath: /app2
+    port: 3000
