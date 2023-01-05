@@ -15,9 +15,21 @@ spec:
     spec:
       containers:
       - name: gkeapp2
-        image:  gcr.io/folkloric-union-370015/newnode2:latest
+        image:  abidh786/webserver:1
         ports:
-        - containerPort: 3000
+        - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /app2
+            port: 80
+          initialDelaySeconds: 60
+          timeoutseconds: 3
+        readinessProbe:
+          httpGet:
+            path: /app2
+            port: 80
+          initialDelaySeconds: 60
+          timeoutseconds: 3      
 ---
 apiVersion: v1
 kind: Service
@@ -25,16 +37,16 @@ metadata:
   name: gkeservice2
   labels:
     app: gkeapp2
-  annotations:
-    cloud.google.com/neg: '{"ingress": true}'
-    cloud.google.com/backend-config: '{"ports": {"http":"argocd-backend-config"}}'
+  # annotations:
+  #   cloud.google.com/neg: '{"ingress": true}'
+  #   cloud.google.com/backend-config: '{"ports": {"80":"argocd-backend-config"}}'
       
 spec:
   selector:
     app: gkeapp2
   ports:
-  - port: 3000
-    targetPort: 3000
+  - port: 80
+    targetPort: 80
   type: NodePort 
 
 ---
@@ -60,7 +72,7 @@ spec:
           service:
             name: gkeservice2
             port: 
-              number: 3000
+              number: 80
 
 
         
