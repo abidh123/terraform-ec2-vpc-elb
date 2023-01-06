@@ -11,7 +11,7 @@ spec:
   rules:
   - http:
       paths:
-      - pathType: Prefix
+      - pathType: ImplementationSpecific
         path: "/"
         backend:
           service:
@@ -19,7 +19,7 @@ spec:
             port: 
               number: 80
 
-      - pathType: Prefix
+      - pathType: ImplementationSpecific
         path: "/app2"
         backend:
           service:
