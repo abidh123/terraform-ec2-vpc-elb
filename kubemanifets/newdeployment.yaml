@@ -18,6 +18,18 @@ spec:
         image:  abidh786/httpd-image:88
         ports:
         - containerPort: 8080
+        volumeMounts:
+        - mountPath: /salman
+          name: persistent-storage
+
+      volumes:
+      - name: persistent-storage
+        persistentVolumeClaim:
+          claimName: my-pv-claim
+               
+          
+
+
 ---
 apiVersion: v1
 kind: Service
